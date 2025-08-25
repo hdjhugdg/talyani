@@ -2,49 +2,69 @@
 <html lang="ar">
 <head>
   <meta charset="UTF-8">
-  <title>سيرفرات HTTP Custom</title>
+  <title>نسخ كلمة السر</title>
   <style>
-    body { font-family: Arial; background: #f7f7f7; padding: 20px; }
-    h1 { color: #333; }
-    .file {
-      background: #fff;
-      padding: 15px;
-      margin: 10px 0;
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      text-align: center;
+      padding: 50px;
     }
-    .btn {
-      background: #0088cc;
-      color: white;
-      padding: 10px 15px;
-      text-decoration: none;
+    .box {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px #aaa;
+      width: 300px;
+      margin: auto;
+    }
+    input {
+      padding: 10px;
+      width: 90%;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
       border-radius: 8px;
+      text-align: center;
+      font-size: 16px;
     }
+    button {
+      padding: 10px;
+      width: 95%;
+      border: none;
+      border-radius: 8px;
+      margin-top: 5px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .copy { background: #2196F3; }
+    .toggle { background: #4CAF50; }
   </style>
 </head>
 <body>
-  <h1>🔥 سيرفرات HTTP Custom</h1>
-
-  <div class="file">
-    <p>📁 سيرفر 1</p>
-    <a class="btn" href="https://api.telegram.org/file/bot7385113961:AAFqVmnOJ5lajK4lNCBE8Bc6nzN8_X3sUBw/documents/file_6.hc" target="_blank">تحميل</a>
-  </div>
-  <div class="file">
-    <p>📁 سيرفر 2</p>
-    <a class="btn" href="https://api.telegram.org/file/bot7385113961:AAFqVmnOJ5lajK4lNCBE8Bc6nzN8_X3sUBw/documents/file_6.hc" target="_blank">تحميل</a>
-  </div>
-  <div class="file">
-    <p>📁 سيرفر 3</p>
-    <a class="btn" href="https://yourdomain.com/files/server3.hc" target="_blank">تحميل</a>
-  </div>
-  <div class="file">
-    <p>📁 سيرفر 4</p>
-    <a class="btn" href="https://yourdomain.com/files/server4.hc" target="_blank">تحميل</a>
-  </div>
-  <div class="file">
-    <p>📁 سيرفر 5</p>
-    <a class="btn" href="https://yourdomain.com/files/server5.hc" target="_blank">تحميل</a>
+  <div class="box">
+    <h3>كلمة السر</h3>
+    <input type="password" id="password" value="123456" readonly>
+    <button class="toggle" onclick="togglePassword()">👁️ إظهار/إخفاء</button>
+    <button class="copy" onclick="copyPassword()">📋 نسخ كلمة السر</button>
   </div>
 
+  <script>
+    function togglePassword() {
+      let passField = document.getElementById("password");
+      if (passField.type === "password") {
+        passField.type = "text";
+      } else {
+        passField.type = "password";
+      }
+    }
+
+    function copyPassword() {
+      let pass = document.getElementById("password").value;
+      navigator.clipboard.writeText(pass).then(() => {
+        alert("✅ تم نسخ كلمة السر!");
+      });
+    }
+  </script>
 </body>
 </html>
