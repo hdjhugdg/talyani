@@ -2,44 +2,94 @@
 <html lang="ar">
 <head>
   <meta charset="UTF-8">
-  <title>نسخ كلمة السر</title>
+  <title>Password File 🔑</title>
   <style>
     body {
+      margin: 0;
       font-family: Arial, sans-serif;
-      background: #f4f4f9;
+      background: linear-gradient(180deg, #1e3c72, #2a5298);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+    header {
+      background: #111;
+      width: 100%;
+      padding: 15px;
       text-align: center;
-      padding: 50px;
+      font-size: 20px;
+    }
+    .title {
+      background: linear-gradient(90deg, #4facfe, #00f2fe);
+      width: 100%;
+      text-align: center;
+      font-size: 22px;
+      font-weight: bold;
+      padding: 12px 0;
     }
     .box {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 0 10px #aaa;
-      width: 320px;
-      margin: auto;
+      background: #141414;
+      padding: 30px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      transition: 0.5s;
+    }
+    .box h2 {
+      color: #00ff66;
+      margin-bottom: 20px;
     }
     button {
-      padding: 12px;
-      width: 95%;
+      background: linear-gradient(90deg, #4facfe, #00f2fe);
+      color: #fff;
       border: none;
-      border-radius: 8px;
-      margin-top: 10px;
-      color: white;
+      padding: 15px 25px;
       font-size: 16px;
+      font-weight: bold;
+      border-radius: 10px;
       cursor: pointer;
-      background: #2196F3;
+      transition: 0.3s;
+      margin: 5px 0;
+    }
+    button:hover {
+      opacity: 0.85;
+    }
+    #passwordBox {
+      margin-top: 20px;
+      padding: 10px;
+      background: #222;
+      border-radius: 8px;
+      font-size: 18px;
+      letter-spacing: 2px;
+      display: none;
     }
   </style>
 </head>
 <body>
-  <div class="box">
-    <h3>🔑 اضغط للنسخ</h3>
-    <button onclick="copyPassword()">📋 نسخ كلمة السر</button>
+  <header>Password File 🔑</header>
+  <div class="title">TALYANI</div>
+
+  <div class="box" id="mainBox">
+    <h2>Password File GCP</h2>
+    <button onclick="showPassword()">Watch ADS & OPEN PASSWORD 🔑</button>
+
+    <div id="passwordBox">
+      <span id="hiddenPassword">*******</span>
+      <br>
+      <button onclick="copyPassword()">Copy Password 📋</button>
+    </div>
   </div>
 
   <script>
-    // كلمة السر محفوظة فقط في الكود 🔐
-    const secretPassword = "123456"; 
+    const secretPassword = "123456";
+
+    function showPassword() {
+      document.getElementById("passwordBox").style.display = "block";
+      document.getElementById("hiddenPassword").textContent = secretPassword;
+    }
 
     function copyPassword() {
       navigator.clipboard.writeText(secretPassword).then(() => {
