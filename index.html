@@ -2,11 +2,11 @@
 <html lang="ar">
 <head>
   <meta charset="UTF-8">
-  <title>نسخ كلمة السر</title>
+  <title>تخطي الإعلان لنسخ كلمة السر</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f9f9f9;
+      background: #f4f4f9;
       text-align: center;
       padding: 50px;
     }
@@ -15,54 +15,41 @@
       padding: 20px;
       border-radius: 12px;
       box-shadow: 0 0 10px #aaa;
-      width: 300px;
+      width: 320px;
       margin: auto;
     }
-    input {
-      padding: 10px;
-      width: 90%;
-      margin-bottom: 10px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      text-align: center;
-      font-size: 16px;
-    }
     button {
-      padding: 10px;
+      padding: 12px;
       width: 95%;
       border: none;
       border-radius: 8px;
-      margin-top: 5px;
+      margin-top: 10px;
       color: white;
       font-size: 16px;
       cursor: pointer;
     }
-    .copy { background: #2196F3; }
-    .toggle { background: #4CAF50; }
+    .ad-btn { background: #FF9800; }
+    .copy-btn { background: #2196F3; display: none; }
   </style>
 </head>
 <body>
   <div class="box">
-    <h3>كلمة السر</h3>
-    <input type="password" id="password" value="123456" readonly>
-    <button class="toggle" onclick="togglePassword()">👁️ إظهار/إخفاء</button>
-    <button class="copy" onclick="copyPassword()">📋 نسخ كلمة السر</button>
+    <h3>⚠️ الرجاء تخطي الإعلان</h3>
+    <button class="ad-btn" onclick="skipAd()">⏩ تخطي الإعلان</button>
+    <button class="copy-btn" id="copyBtn" onclick="copyPassword()">📋 نسخ كلمة السر</button>
   </div>
 
   <script>
-    function togglePassword() {
-      let passField = document.getElementById("password");
-      if (passField.type === "password") {
-        passField.type = "text";
-      } else {
-        passField.type = "password";
-      }
+    const secretPassword = "123456"; // 🔑 ضع هنا كلمة السر
+
+    function skipAd() {
+      alert("✅ تم تخطي الإعلان بنجاح!");
+      document.getElementById("copyBtn").style.display = "block";
     }
 
     function copyPassword() {
-      let pass = document.getElementById("password").value;
-      navigator.clipboard.writeText(pass).then(() => {
-        alert("✅ تم نسخ كلمة السر!");
+      navigator.clipboard.writeText(secretPassword).then(() => {
+        alert("📋 تم نسخ كلمة السر!");
       });
     }
   </script>
