@@ -14,6 +14,7 @@
       align-items: center;
       justify-content: center;
       color: white;
+      overflow: hidden;
     }
     header {
       background: #111;
@@ -57,14 +58,26 @@
     button:hover {
       opacity: 0.85;
     }
-    #passwordBox {
-      margin-top: 20px;
-      padding: 10px;
-      background: #222;
-      border-radius: 8px;
-      font-size: 18px;
-      letter-spacing: 2px;
+    /* الواجهة الجديدة */
+    #passwordScreen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(30,60,114,0.95);
       display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      z-index: 9999;
+    }
+    #passwordBox {
+      background: #222;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.7);
     }
   </style>
 </head>
@@ -74,21 +87,43 @@
 
   <div class="box" id="mainBox">
     <h2>Password File GCP</h2>
-    <button onclick="showPassword()">Watch ADS & OPEN PASSWORD 🔑</button>
+    <button onclick="showPasswordScreen()">Watch ADS & OPEN PASSWORD 🔑</button>
+  </div>
 
-    <div id="passwordBox">
-      <span id="hiddenPassword">*******</span>
-      <br>
-      <button onclick="copyPassword()">Copy Password 📋</button>
+  <!-- الواجهة الجديدة -->
+  <div id="passwordScreen">
+    <div class="box" id="passwordBox">
+      <h2>👀 شاهد الإعلان لعرض كلمة السر</h2>
+      <p id="countdown">5 ثواني...</p>
+      <button id="copyBtn" style="display:none;" onclick="copyPassword()">Copy Password 📋</button>
+      <p id="passwordText" style="margin-top:10px; font-size:20px; color:#00ff66;"></p>
     </div>
   </div>
 
   <script>
     const secretPassword = "123456";
 
-    function showPassword() {
-      document.getElementById("passwordBox").style.display = "block";
-      document.getElementById("hiddenPassword").textContent = secretPassword;
+    function showPasswordScreen() {
+      document.getElementById("passwordScreen").style.display = "flex";
+
+      let countdown = 5; // عدد الثواني لمشاهدة الإعلان
+      const countdownEl = document.getElementById("countdown");
+      const passwordText = document.getElementById("passwordText");
+      const copyBtn = document.getElementById("copyBtn");
+
+      countdownEl.textContent = countdown + " ثواني...";
+
+      const timer = setInterval(() => {
+        countdown--;
+        if(countdown > 0){
+          countdownEl.textContent = countdown + " ثواني...";
+        } else {
+          clearInterval(timer);
+          countdownEl.style.display = "none";
+          passwordText.textContent = secretPassword; // عرض كلمة السر
+          copyBtn.style.display = "inline-block"; // إظهار زر النسخ
+        }
+      }, 1000);
     }
 
     function copyPassword() {
