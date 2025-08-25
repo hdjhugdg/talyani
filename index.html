@@ -2,6 +2,7 @@
 <html lang="ar">
 <head>
   <meta charset="UTF-8">
+  <meta name="monetag" content="236bd8716501403b9ae8a7d6cd6a34ef">
   <title>Password File 🔑</title>
   <style>
     body {
@@ -82,7 +83,8 @@
       max-width: 500px;
     }
   </style>
-  <!-- الإعلان الجديد فقط -->
+
+  <!-- إعلان libtl.com -->
   <script src='//libtl.com/sdk.js' data-zone='9774003' data-sdk='show_9774003'></script>
 </head>
 <body>
@@ -113,16 +115,21 @@
       const passwordText = document.getElementById("passwordText");
       const copyBtn = document.getElementById("copyBtn");
 
-      // استدعاء الإعلان الجديد مباشرة
-      show_9774003().then(() => {
-        status.style.display = "none";
+      if (typeof show_9774003 === "function") {
+        show_9774003().then(() => {
+          status.style.display = "none";
+          passwordText.textContent = secretPassword;
+          copyBtn.style.display = "inline-block";
+        }).catch(() => {
+          status.textContent = "فشل في عرض الإعلان. يمكنك الآن نسخ كلمة السر.";
+          passwordText.textContent = secretPassword;
+          copyBtn.style.display = "inline-block";
+        });
+      } else {
+        status.textContent = "الإعلان غير متاح الآن.";
         passwordText.textContent = secretPassword;
         copyBtn.style.display = "inline-block";
-      }).catch(() => {
-        status.textContent = "فشل في عرض الإعلان. يمكنك الآن نسخ كلمة السر.";
-        passwordText.textContent = secretPassword;
-        copyBtn.style.display = "inline-block";
-      });
+      }
     }
 
     function copyPassword() {
