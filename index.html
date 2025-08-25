@@ -2,7 +2,7 @@
 <html lang="ar">
 <head>
   <meta charset="UTF-8">
-  <title>تخطي الإعلان لنسخ كلمة السر</title>
+  <title>نسخ كلمة السر</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -27,26 +27,19 @@
       color: white;
       font-size: 16px;
       cursor: pointer;
+      background: #2196F3;
     }
-    .ad-btn { background: #FF9800; }
-    .copy-btn { background: #2196F3; display: none; }
   </style>
 </head>
 <body>
   <div class="box">
-    <h3>⚠️ الرجاء تخطي الإعلان</h3>
-    <button class="ad-btn" onclick="skipAd()">⏩ تخطي الإعلان</button>
-    <button class="copy-btn" id="copyBtn" onclick="copyPassword()">📋 نسخ كلمة السر</button>
+    <h3>🔑 اضغط للنسخ</h3>
+    <button onclick="copyPassword()">📋 نسخ كلمة السر</button>
   </div>
 
   <script>
-    // كلمة السر مخزنة فقط هنا 🔐
+    // كلمة السر محفوظة فقط في الكود 🔐
     const secretPassword = "123456"; 
-
-    function skipAd() {
-      alert("✅ تم تخطي الإعلان بنجاح!");
-      document.getElementById("copyBtn").style.display = "block";
-    }
 
     function copyPassword() {
       navigator.clipboard.writeText(secretPassword).then(() => {
