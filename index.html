@@ -72,12 +72,22 @@
       justify-content: center;
       text-align: center;
       z-index: 9999;
+      padding: 20px;
     }
     #passwordBox {
       background: #222;
-      padding: 30px;
+      padding: 20px;
       border-radius: 15px;
       box-shadow: 0 0 20px rgba(0,0,0,0.7);
+      width: 100%;
+      max-width: 500px;
+    }
+    iframe {
+      border: none;
+      width: 100%;
+      height: 300px;
+      border-radius: 10px;
+      margin-bottom: 15px;
     }
   </style>
 </head>
@@ -94,6 +104,7 @@
   <div id="passwordScreen">
     <div class="box" id="passwordBox">
       <h2>👀 شاهد الإعلان لعرض كلمة السر</h2>
+      <iframe src="https://otieu.com/4/9773985"></iframe>
       <p id="countdown">5 ثواني...</p>
       <button id="copyBtn" style="display:none;" onclick="copyPassword()">Copy Password 📋</button>
       <p id="passwordText" style="margin-top:10px; font-size:20px; color:#00ff66;"></p>
