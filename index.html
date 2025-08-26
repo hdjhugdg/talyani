@@ -2,87 +2,34 @@
 <html lang="ar">
 <head>
   <meta charset="UTF-8">
+  <title>إعلانات مع كلمة السر</title>
+
+  <!-- كود Monetag -->
   <meta name="monetag" content="236bd8716501403b9ae8a7d6cd6a34ef">
-  <title>Password File 🔑</title>
-  <style>
-    /* واجهة TALYANI بالكامل كما طلبت */
-    body { margin:0; font-family:Arial,sans-serif; background:linear-gradient(180deg,#1e3c72,#2a5298); height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; color:#fff; overflow:hidden; }
-    header { background:#111; width:100%; padding:15px; text-align:center; font-size:20px; }
-    .title { background:linear-gradient(90deg,#4facfe,#00f2fe); width:100%; text-align:center; font-size:22px; font-weight:bold; padding:12px 0; }
-    .box { background:#141414; padding:30px; border-radius:15px; text-align:center; box-shadow:0 0 20px rgba(0,0,0,0.5); transition:0.5s; max-width:500px; width:90%; }
-    .box h2 { color:#00ff66; margin-bottom:20px; }
-    button { background:linear-gradient(90deg,#4facfe,#00f2fe); color:#fff; border:none; padding:15px 25px; font-size:16px; font-weight:bold; border-radius:10px; cursor:pointer; margin:5px 0; }
-    button:hover { opacity:0.85; }
-    #passwordScreen { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(30,60,114,0.95); display:none; flex-direction:column; align-items:center; justify-content:center; text-align:center; z-index:9999; padding:20px; }
-    #passwordBox { background:#222; padding:20px; border-radius:15px; box-shadow:0 0 20px rgba(0,0,0,0.7); width:100%; max-width:500px; }
-  </style>
 
-  <!-- SDK Monetag: استبدل DOMAIN إذا تبين أن SDK URL مختلف -->
-  <script
-    src="https://cdn.monetag.ai/sdk.js"
-    data-zone="236bd8716501403b9ae8a7d6cd6a34ef"
-    data-sdk="show_236bd8716501403b9ae8a7d6cd6a34ef"
-    defer>
-  </script>
+  <!-- كود Libtl -->
+  <script src='//libtl.com/sdk.js' data-zone='9774003' data-sdk='show_9774003'></script>
 </head>
-<body>
-  <header>Password File 🔑</header>
-  <div class="title">TALYANI</div>
+<body style="text-align:center; font-family:Arial">
 
-  <div class="box" id="mainBox">
-    <h2>Password File GCP</h2>
-    <button id="openBtn">Watch ADS & OPEN PASSWORD 🔑</button>
-  </div>
+  <h2>Watch ADS & OPEN PASSWORD 🔑</h2>
 
-  <!-- شاشة تظهر بعد ضغط الزر -->
-  <div id="passwordScreen">
-    <div class="box" id="passwordBox">
-      <h2>👀 شاهد الإعلان لعرض كلمة السر</h2>
-      <p id="status">...</p>
-      <button id="copyBtn" style="display:none;" onclick="copyPassword()">Copy Password 📋</button>
-      <p id="passwordText" style="margin-top:10px; font-size:20px; color:#00ff66;"></p>
-    </div>
-  </div>
+  <p>👀 شاهد الإعلان لعرض كلمة السر</p>
+
+  <div id="ads" style="margin:20px auto;"></div>
+
+  <button onclick="showPassword()" style="padding:10px 20px; font-size:18px; cursor:pointer;">
+    👁 عرض كلمة السر
+  </button>
+
+  <p id="password" style="margin-top:20px; font-weight:bold; display:none;">كلمة السر: 123456</p>
 
   <script>
-    const secretPassword = "123456";
-    const openBtn = document.getElementById("openBtn");
-    const passwordScreen = document.getElementById("passwordScreen");
-    const status = document.getElementById("status");
-    const passwordText = document.getElementById("passwordText");
-    const copyBtn = document.getElementById("copyBtn");
-
-    openBtn.addEventListener("click", () => {
-      passwordScreen.style.display = "flex";
-      status.textContent = "جَارٍ تشغيل الإعلان...";
-
-      const fnName = "show_236bd8716501403b9ae8a7d6cd6a34ef";
-
-      if (typeof window[fnName] === "function") {
-        window[fnName]({ type: 'end', ymid: 'user002', requestVar: 'password_popup' })
-          .then(() => {
-            status.style.display = "none";
-            passwordText.textContent = secretPassword;
-            copyBtn.style.display = "inline-block";
-          })
-          .catch((err) => {
-            console.warn("Ad failed/cancelled:", err);
-            status.textContent = "فشل الإعلان. يمكنك نسخ كلمة السر الآن.";
-            passwordText.textContent = secretPassword;
-            copyBtn.style.display = "inline-block";
-          });
-      } else {
-        status.textContent = "SDK Monetag غير جاهز أو الرابط غير صحيح.";
-        passwordText.textContent = secretPassword;
-        copyBtn.style.display = "inline-block";
-      }
-    });
-
-    function copyPassword() {
-      navigator.clipboard.writeText(secretPassword).then(() => {
-        alert("📋 تم نسخ كلمة السر!");
-      });
+    function showPassword(){
+      // هنا تقدر تزيد شرط يظهر غير من بعد الإعلانات
+      document.getElementById("password").style.display = "block";
     }
   </script>
+
 </body>
 </html>
