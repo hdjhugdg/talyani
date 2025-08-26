@@ -2,92 +2,45 @@
 <html lang="ar">
 <head>
   <meta charset="UTF-8">
+  <!-- Meta Monetag الذي أرسلته -->
   <meta name="monetag" content="236bd8716501403b9ae8a7d6cd6a34ef">
+
   <title>Password File 🔑</title>
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(180deg, #1e3c72, #2a5298);
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      overflow: hidden;
+    /* تصميم TALYANI كما أردت */
+    body { margin:0; font-family:Arial, sans-serif;
+      background:linear-gradient(180deg,#1e3c72,#2a5298);
+      height:100vh; display:flex; flex-direction:column;
+      align-items:center; justify-content:center; color:#fff; overflow:hidden;
     }
-    header {
-      background: #111;
-      width: 100%;
-      padding: 15px;
-      text-align: center;
-      font-size: 20px;
+    header{ background:#111; width:100%; padding:15px; text-align:center; font-size:20px;}
+    .title{ background:linear-gradient(90deg,#4facfe,#00f2fe); width:100%; text-align:center;
+      font-size:22px; font-weight:bold; padding:12px 0;
     }
-    .title {
-      background: linear-gradient(90deg, #4facfe, #00f2fe);
-      width: 100%;
-      text-align: center;
-      font-size: 22px;
-      font-weight: bold;
-      padding: 12px 0;
+    .box{ background:#141414; padding:30px; border-radius:15px; text-align:center;
+      box-shadow:0 0 20px rgba(0,0,0,0.5); transition:0.5s; max-width:520px; width:90%;
     }
-    .box {
-      background: #141414;
-      padding: 30px;
-      border-radius: 15px;
-      text-align: center;
-      box-shadow: 0 0 20px rgba(0,0,0,0.5);
-      transition: 0.5s;
+    .box h2{ color:#00ff66; margin-bottom:20px; }
+    button{ background:linear-gradient(90deg,#4facfe,#00f2fe); color:#fff; border:none;
+      padding:15px 25px; font-size:16px; font-weight:bold; border-radius:10px; cursor:pointer;
     }
-    .box h2 {
-      color: #00ff66;
-      margin-bottom: 20px;
+    #passwordScreen{ position:fixed; top:0; left:0; width:100%; height:100%;
+      background:rgba(30,60,114,0.95); display:none; flex-direction:column; align-items:center;
+      justify-content:center; text-align:center; z-index:9999; padding:20px;
     }
-    button {
-      background: linear-gradient(90deg, #4facfe, #00f2fe);
-      color: #fff;
-      border: none;
-      padding: 15px 25px;
-      font-size: 16px;
-      font-weight: bold;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: 0.3s;
-      margin: 5px 0;
-    }
-    button:hover {
-      opacity: 0.85;
-    }
-    #passwordScreen {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(30,60,114,0.95);
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      z-index: 9999;
-      padding: 20px;
-    }
-    #passwordBox {
-      background: #222;
-      padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.7);
-      width: 100%;
-      max-width: 500px;
+    #passwordBox{ background:#222; padding:20px; border-radius:15px; box-shadow:0 0 20px rgba(0,0,0,0.7);
+      width:100%; max-width:500px;
     }
   </style>
 
-  <!-- Monetag SDK -->
-  <script src="https://cdn.monetag.ai/sdk.js"></script>
-  <!-- libtl SDK -->
-  <script src='//libtl.com/sdk.js' data-zone='9774003' data-sdk='show_9774003'></script>
+  <!-- **** ضع هنا رابط SDK من Monetag الذي يقدّمونه في الداشبورد (مثال البناء حسب التوثيق) **** -->
+  <!-- النمط الموصى به في التوثيق: <script src="https://{SDK_HOST}/sdk.js" data-zone="ZONE_ID" data-sdk="show_ZONE_ID"></script> -->
+  <!-- إذا لم تحصل بعد على رابط SDK من حساب Monetag، اترك السطر التالي واستبدل SDK_URL_HERE برابطهم. -->
+  <script src="SDK_URL_HERE/sdk.js"
+          data-zone="236bd8716501403b9ae8a7d6cd6a34ef"
+          data-sdk="show_236bd8716501403b9ae8a7d6cd6a34ef"
+          defer></script>
+  <!-- ملاحظة: بعض حسابات Monetag تستعمل CDN مختلف أو سكربت مُزوَّد من لوحة التحكم، لذا إن لم يعمل ضع رابط SDK الذي تحصل عليه من الـ dashboard. -->
 </head>
 <body>
   <header>Password File 🔑</header>
@@ -95,15 +48,65 @@
 
   <div class="box" id="mainBox">
     <h2>Password File GCP</h2>
-    <button onclick="showPasswordScreen()">Watch ADS & OPEN PASSWORD 🔑</button>
+    <button id="openBtn">Watch ADS & OPEN PASSWORD 🔑</button>
   </div>
 
   <!-- واجهة كلمة السر -->
   <div id="passwordScreen">
     <div class="box" id="passwordBox">
       <h2>👀 شاهد الإعلان لعرض كلمة السر</h2>
-      <p id="status">جارٍ عرض الإعلان...</p>
+      <p id="status">جَارٍ تشغيل الإعلان...</p>
       <button id="copyBtn" style="display:none;" onclick="copyPassword()">Copy Password 📋</button>
       <p id="passwordText" style="margin-top:10px; font-size:20px; color:#00ff66;"></p>
     </div>
   </div>
+
+  <script>
+    const secretPassword = "123456";
+    const openBtn = document.getElementById('openBtn');
+    const passwordScreen = document.getElementById('passwordScreen');
+    const status = document.getElementById('status');
+    const passwordText = document.getElementById('passwordText');
+    const copyBtn = document.getElementById('copyBtn');
+
+    openBtn.addEventListener('click', () => {
+      // افتَح الواجهة المرئية أولاً
+      passwordScreen.style.display = 'flex';
+      status.textContent = 'جَارٍ تشغيل إعلان Monetag...';
+
+      // اسم الدالة العامة حسب data-sdk: show_<ZONE>
+      const showFnName = 'show_236bd8716501403b9ae8a7d6cd6a34ef';
+
+      // إذا كان SDK محمّلاً ويوفر الدالة، استدعِها؛ وإلا أعرض رسالة بديلة
+      if (typeof window[showFnName] === 'function') {
+        // استدعاء الدالة — الدالة تعيد Promise حسب التوثيق
+        window[showFnName]().then(() => {
+          // تم إكمال مشاهدة الإعلان بنجاح
+          status.style.display = 'none';
+          passwordText.textContent = secretPassword;
+          copyBtn.style.display = 'inline-block';
+        }).catch((err) => {
+          // فشل الإعلان أو تم إلغاؤه — نكشف الكلمة كتحوّط
+          console.warn('Monetag ad failed or was cancelled', err);
+          status.textContent = 'فشل في عرض الإعلان. يمكنك الآن نسخ كلمة السر.';
+          passwordText.textContent = secretPassword;
+          copyBtn.style.display = 'inline-block';
+        });
+      } else {
+        // SDK لم يُحمّل بعد أو الرابط غير صحيح
+        status.textContent = 'SDK Monetag غير محمّل؛ تأكد من رابط sdk.js في <head>.';
+        passwordText.textContent = secretPassword;
+        copyBtn.style.display = 'inline-block';
+      }
+    });
+
+    function copyPassword() {
+      navigator.clipboard.writeText(secretPassword).then(() => {
+        alert('📋 تم نسخ كلمة السر!');
+      }).catch(()=> {
+        alert('فشل في النسخ — اسمح بالوصول للحافظة أو انسخ يدويًا.');
+      });
+    }
+  </script>
+</body>
+</html>
